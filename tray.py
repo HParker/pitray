@@ -1,8 +1,11 @@
 from bottle import run, route, static_file, template
 import os
 import urllib2
+import sqlite3
 
 root = os.path.expanduser('~/Music')
+
+conn = sqlite3.connect('data.db')
 
 @route('/')
 @route('/hello/<name>')
@@ -22,7 +25,14 @@ def name(path):
 def render(element):
     return link_to(name(element), element)
 
+@route('/static/<path:path>')
+def render_img(path):
+    return static_file(path, root='/')
 
+@route('/local/')
+def show_local():
+    albums = conn.execute("select distinct album, art_path, from songs order by album")
+    return template('local', albums=albums)
 
 
 @route('/show/')

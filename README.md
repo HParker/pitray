@@ -14,5 +14,8 @@ cd pitray
 3. get bottle
 wget http://bottlepy.org/bottle.py
 
+NOTE: make sure that all of your music has cover art. I recomend cover grabber
+https://github.com/thedonvaughn/cover_grabber
+
 4. run
 python tray.py
