@@ -31,7 +31,7 @@ def render_img(path):
 
 @route('/local/')
 def show_local():
-    albums = conn.execute("select distinct album, art_path, from songs order by album")
+    albums = conn.execute("select artist, album, title, path, art_path from songs group by artist, album, title")
     return template('local', albums=albums)
 
 
